@@ -22,6 +22,10 @@ def eval_metrics(actual, pred):
     r2 = r2_score(actual, pred)
     return rmse, mae, r2
 
+mlflow.set_tracking_uri('postgresql://datascience:D%40taS1ence@13.95.155.121/mlops')
+tracking_uri = mlflow.get_tracking_uri()
+print("Current tracking uri: {}".format(tracking_uri))
+
 if __name__ == "__main__":
     warnings.filterwarnings("ignore")
     np.random.seed(40)
