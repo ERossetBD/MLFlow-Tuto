@@ -53,6 +53,8 @@ if __name__ == "__main__":
         predicted_qualities = lr.predict(test_x)
 
         (rmse, mae, r2) = eval_metrics(test_y, predicted_qualities)
+        
+        signature = infer_signature(train_x, predicted_qualities)
 
         print("Elasticnet model (alpha=%f, l1_ratio=%f):" % (alpha, l1_ratio))
         print("  RMSE: %s" % rmse)
@@ -64,3 +66,4 @@ if __name__ == "__main__":
         mlflow.log_metric("rmse", rmse)
         mlflow.log_metric("r2", r2)
         mlflow.log_metric("mae", mae)
+        mlflow.sklearn.log_model(lr, "model", signature=signature)
